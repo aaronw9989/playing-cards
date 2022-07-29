@@ -25,7 +25,8 @@ public class TestMain {
     System.out.println(deck);
 
     // Local class because inside a method
-    class RankFirstComparator implements Comparator<Card> {
+
+    deck.sort(new Comparator<Card>() {
 
       @Override
       public int compare(Card card1, Card card2) {
@@ -36,12 +37,11 @@ public class TestMain {
         }
         return comparison;
       }
+      });
+
+    System.out.println(deck);
 
     }
 
-    deck.sort(new RankFirstComparator());
-    System.out.println(deck);
-
   }
 
-}
