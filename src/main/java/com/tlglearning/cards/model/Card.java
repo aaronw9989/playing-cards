@@ -1,5 +1,6 @@
 package com.tlglearning.cards.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 // The card class implements the ability to be
@@ -59,12 +60,10 @@ public final class Card implements Comparable<Card> {
 
   @Override
   public int compareTo(Card other) {
-    // Java lets us access fields in other instances of the same class
-    int comparison = suit.compareTo(other.suit);
-    if (comparison == 0) {
-      comparison = rank.compareTo(other.rank);
-    }
-    return comparison;
+    return Comparator
+        .comparing(Card::getSuit)
+        .thenComparing(Card::getRank)
+        .compare(this, other);
   }
 
 }
