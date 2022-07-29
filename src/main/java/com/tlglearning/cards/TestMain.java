@@ -26,22 +26,17 @@ public class TestMain {
 
     // Local class because inside a method
 
-    deck.sort(new Comparator<Card>() {
-
-      @Override
-      public int compare(Card card1, Card card2) {
-
-        int comparison = card1.getRank().compareTo(card2.getRank());
-        if (comparison == 0) {
-          comparison = card1.getSuit().compareTo(card2.getSuit());
-        }
-        return comparison;
+    deck.sort((card1, card2) -> {
+      int comparison = card1.getRank().compareTo(card2.getRank());
+      if (comparison == 0) {
+        comparison = card1.getSuit().compareTo(card2.getSuit());
       }
-      });
+      return comparison;
+    });
 
     System.out.println(deck);
 
-    }
-
   }
+
+}
 
