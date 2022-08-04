@@ -12,6 +12,7 @@ public class Deck implements Iterable<Card> {
 
   private final List<Card> cards;
   private Random defaultRng;
+  private Iterator<Card> drawIterator; // NOTE: The default value of an object reference is null
 
 
   public Deck() {
@@ -38,6 +39,7 @@ public class Deck implements Iterable<Card> {
 
   public void shuffle(Random rng) {
     Collections.shuffle(cards, rng);
+    drawIterator = null;
   }
 
   public void sort() {
@@ -47,6 +49,7 @@ public class Deck implements Iterable<Card> {
 
   public void sort(Comparator<Card> comparator) {
     cards.sort(comparator);
+    drawIterator = null;
   }
 
   @Override
@@ -63,5 +66,17 @@ public class Deck implements Iterable<Card> {
     return cards.size();
   }
 
+  public boolean isEmpty() {
+    // If we have a draw iterator and there is no next cards, then our deck is empty
+    return drawIterator != null && !drawIterator.hasNext();
+  }
+
+  public Card draw() {
+    if (drawIterator == null) {
+      // Return a new array of card to iterate over
+      drawIterator = cards.iterator();
+    }
+    return drawIterator.next();
+  }
 
 }
